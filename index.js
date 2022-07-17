@@ -6,10 +6,11 @@ const gameSchema = new mongoose.Schema({
 gameSchema.set('toJSON', { getters: true, virtuals: false });
 const Game = mongoose.model('Game', gameSchema);
 
-async function createGame(playerName) {
+//TODO some maddening stuff here with options/defaults...
+async function createGame(playerName, env) {
 
     try {
-        mongoose.connect(process.env['DATABASE_URL'], process.env['DATABASE_NAME']);
+        mongoose.connect(env['DATABASE_URL'], env['DATABASE_NAME']);
         const game = new Game({ name1: playerName});
         await game.save();
 
