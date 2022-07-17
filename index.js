@@ -8,13 +8,13 @@ const Game = mongoose.model('Game', gameSchema);
 
 //TODO are these options done decently?
 async function createGame(playerName, options) {
-
     let defaults = {
         uri: process.env['DATABASE_URL'],
         dbname: process.env['DATABASE_NAME']
     };
     options = { ...defaults, ...(options || {})};
 
+    console.log(`options: ${options}`);
     try {
         mongoose.connect(options.uri, options.dbname);
         const game = new Game({ name1: playerName});
