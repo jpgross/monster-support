@@ -8,7 +8,7 @@ const Game = mongoose.model('Game', gameSchema);
 
 //TODO are these options done decently?
 async function createGame(playerName, options) {
-    var _opts = _.defaults(options || {}, {
+    var _opts = await _.defaults(options || {}, {
         uri: process.env['DATABASE_URL'],
         dbname: process.env['DATABASE_NAME']
     });
