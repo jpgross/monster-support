@@ -6,18 +6,10 @@ const gameSchema = new mongoose.Schema({
 gameSchema.set('toJSON', { getters: true, virtuals: false });
 const Game = mongoose.model('Game', gameSchema);
 
-//TODO are these options done decently?
-async function createGame(playerName, options) {
-    var _opts = await _.defaults(options || {}, {
-        uri: process.env['DATABASE_URL'],
-        dbname: process.env['DATABASE_NAME']
-    });
- 
-    console.log(`options: ${process.env['DATABASE_URL']}`);
-    return { _id: "munchmunchmunch"};
-    /*
+async function createGame(playerName) {
+
     try {
-        mongoose.connect(_opts.uri, _opts.dbname);
+        mongoose.connect(process.env['DATABASE_URL'], process.env['DATABASE_NAME']);
         const game = new Game({ name1: playerName});
         await game.save();
 
@@ -28,7 +20,7 @@ async function createGame(playerName, options) {
         console.error('error during save', e);
         throw e;
     }
-    */
+
 }
 
 module.exports.createGame = createGame;
