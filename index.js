@@ -13,7 +13,9 @@ async function createGame(playerName, options) {
         dbname: process.env['DATABASE_NAME']
     });
  
-    console.log(`options: ${_opts}`);
+    console.log(`options: ${process.env['DATABASE_URL']}`);
+    return { _id: "munchmunchmunch"};
+    /*
     try {
         mongoose.connect(_opts.uri, _opts.dbname);
         const game = new Game({ name1: playerName});
@@ -26,6 +28,7 @@ async function createGame(playerName, options) {
         console.error('error during save', e);
         throw e;
     }
+    */
 }
 
 module.exports.createGame = createGame;
