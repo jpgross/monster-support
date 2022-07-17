@@ -6,11 +6,17 @@ const gameSchema = new mongoose.Schema({
 gameSchema.set('toJSON', { getters: true, virtuals: false });
 const Game = mongoose.model('Game', gameSchema);
 
-//TODO need to set uri/name in a constructor or something?
-async function createGame(dbUri, dbName, playerName) {
+//TODO are these options done decently?
+async function createGame(playerName, options) {
+
+    let defaults = {
+        uri: process.env['DATABASE_URL'],
+        dbname: process.env['DATABASE_NAME']
+    };
+    options = { ...defaults, ...(options || {})};
 
     try {
-        mongoose.connect(dbUri, {dbName: dbName});
+        mongoose.connect(options.uri, options.dbname);
         const game = new Game({ name1: playerName});
         await game.save();
 
