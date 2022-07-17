@@ -8,15 +8,14 @@ const Game = mongoose.model('Game', gameSchema);
 
 //TODO are these options done decently?
 async function createGame(playerName, options) {
-    let defaults = {
+    var _opts = _.defaults(options || {}, {
         uri: process.env['DATABASE_URL'],
         dbname: process.env['DATABASE_NAME']
-    };
-    options = { ...defaults, ...(options || {})};
-
-    console.log(`options: ${options}`);
+    });
+ 
+    console.log(`options: ${_opts}`);
     try {
-        mongoose.connect(options.uri, options.dbname);
+        mongoose.connect(_opts.uri, _opts.dbname);
         const game = new Game({ name1: playerName});
         await game.save();
 
