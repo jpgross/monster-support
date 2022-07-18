@@ -5,4 +5,8 @@ const gameSchema = new mongoose.Schema({
 });
 gameSchema.set('toJSON', { getters: true, virtuals: false });
 
-module.exports.schema.Game = mongoose.model('Game', gameSchema);
+
+
+const schemas = { Game: mongoose.model('Game', gameSchema)};
+
+module.exports.schemas = schemas;
